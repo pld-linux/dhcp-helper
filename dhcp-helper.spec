@@ -5,8 +5,8 @@ Version:	0.2
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
-Source0:	%{name}-%{version}.tar.gz
-# Source0-md5:	-
+Source0:	http://thekelleys.org.uk/dhcp-helper/%{name}-%{version}.tar.gz
+# Source0-md5:	2ad69a3388b0750c66cc9da212397a90
 URL:		http://thekelleys.org.uk/dhcp-helper/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
