@@ -1,0 +1,14 @@
+# Nice level for dhcp-helper
+SERVICE_RUN_NICE_LEVEL="+0"
+
+# Specify here DHCP server or servers where to relay DHCP requests
+RELAY_TO_SERVERS=
+
+# Relay to DHCP server using broadcast via interface (no need to specify server)
+BROADCAST_TO_INTERFACE=
+
+# Listen on specified interfaces (if not set listen on all)
+LISTEN_INTERFACES=
+
+# Exclude some interfaces 
+EXCLUDE_INTERFACES=
