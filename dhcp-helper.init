@@ -1,0 +1,69 @@
+#!/bin/sh
+# DHCP Server
+#
+# chkconfig:	345 80 20
+# description:	DHCP relay helper
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config
+[ -f /etc/sysconfig/dhcp-helper ] && . /etc/sysconfig/dhcp-helper
+
+# Check that networking is up.
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network -a "$1" != stop -a "$1" != status ]; then
+		msg_network_down DHCPD
+		exit 1
+	fi
+else
+	exit 0
+fi
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/dhcp-helper ]; then
+		msg_starting "DHCP helper"
+		
+		[ -n "${RELAY_TO_SERVERS}" ] && DHCPH_OPTIONS="${DHCPH_OPTIONS} -s ${RELAY_TO_SERVERS}"
+		[ -n "${BROADCAST_TO_INTERFACE}" ] && DHCPH_OPTIONS="${DHCPH_OPTIONS} -b ${BROADCAST_TO_INTERFACE}"
+		[ -n "${LISTEN_INTERFACES}" ] && DHCPH_OPTIONS="${DHCPH_OPTIONS} -i ${LISTEN_INTERFACES}"
+		[ -n "${EXCLUDE_INTERFACES}" ] && DHCPH_OPTIONS="${DHCPH_OPTIONS} -e ${EXCLUDE_INTERFACES}"
+				
+		daemon dhcp-helper ${DHCPH_OPTIONS} 
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/dhcp-helper
+	else
+		msg_already_running "DHCP helper"
+	fi
+	;;
+  stop)
+	if [ -f /var/lock/subsys/dhcpd ]; then
+		msg_stopping "DHCP helper"
+		killproc dhcp-helper
+		rm -f /var/run/dhcpd.pid /var/lock/subsys/dhcp-helper >/dev/null 2>&1
+	else
+		msg_not_running "DHCP helper"
+	fi
+	;;
+  restart|reload)
+	$0 stop
+	$0 start
+	exit $?
+	;;
+  status)
+	status dhcp-helper
+	exit $?
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
