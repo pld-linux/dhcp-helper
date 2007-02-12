@@ -1,5 +1,5 @@
 Summary:	simple, straightforward DHCP relay agent
-Summary(pl):	prosty, nieskomplikowany DHCP relay
+Summary(pl.UTF-8):   prosty, nieskomplikowany DHCP relay
 Name:		dhcp-helper
 Version:	0.7
 Release:	1
@@ -19,7 +19,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is a simple, straightforward DHCP relay agent, written as
 alternative to the ISC relay.
 
-%description -l pl
+%description -l pl.UTF-8
 To jest prosty, nieskomplikowany agent DHCP relay, napisany jako
 alternatywa dla relaya autorstwa ISC.
 
