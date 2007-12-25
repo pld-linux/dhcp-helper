@@ -1,5 +1,5 @@
-Summary:	simple, straightforward DHCP relay agent
-Summary(pl.UTF-8):	prosty, nieskomplikowany DHCP relay
+Summary:	Simple, straightforward DHCP relay agent
+Summary(pl.UTF-8):	Prosty, nieskomplikowany DHCP relay
 Name:		dhcp-helper
 Version:	0.7
 Release:	1
@@ -32,15 +32,15 @@ alternatywa dla relaya autorstwa ISC.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{rc.d/init.d,sysconfig}
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	BINDIR="%{_sbindir}" \
 	MANDIR="%{_mandir}"
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/%{name}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/%{name}
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
