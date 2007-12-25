@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Prosty, nieskomplikowany DHCP relay
 Name:		dhcp-helper
 Version:	0.7
 Release:	1
-License:	GPL
+License:	GPL v2
 Group:		Networking/Daemons
 Source0:	http://thekelleys.org.uk/dhcp-helper/%{name}-%{version}.tar.gz
 # Source0-md5:	840636145f4b15b92cdca4ad1d6810e9
@@ -28,6 +28,7 @@ alternatywa dla relaya autorstwa ISC.
 
 %build
 %{__make} \
+	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags}"
 
 %install
@@ -57,8 +58,8 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc CHANGELOG README
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/dhcp-helper
 %attr(754,root,root) /etc/rc.d/init.d/dhcp-helper
-%attr(755,root,root) %{_sbindir}/*
-%{_mandir}/man*/*
+%attr(755,root,root) %{_sbindir}/dhcp-helper
+%{_mandir}/man8/dhcp-helper.8*
