@@ -1,12 +1,12 @@
 Summary:	Simple, straightforward DHCP relay agent
 Summary(pl.UTF-8):	Prosty, nieskomplikowany DHCP relay
 Name:		dhcp-helper
-Version:	0.7
+Version:	0.8
 Release:	1
 License:	GPL v2
 Group:		Networking/Daemons
 Source0:	http://thekelleys.org.uk/dhcp-helper/%{name}-%{version}.tar.gz
-# Source0-md5:	840636145f4b15b92cdca4ad1d6810e9
+# Source0-md5:	e7029d720878e335564872ad3551f901
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 URL:		http://thekelleys.org.uk/dhcp-helper/
